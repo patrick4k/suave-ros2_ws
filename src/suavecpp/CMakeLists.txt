@@ -29,7 +29,11 @@ find_package(pcl_conversions REQUIRED)
 
 # ADD ALL SOURCE FILES HERE
 add_executable(suave_controller
-src/suave_controller.cpp
+  src/suave_controller.cpp
+  src/nodes/SuaveController.h
+  src/nodes/SuaveController.cpp
+  src/nodes/SuaveMaskingController.h
+  src/nodes/SuaveMaskingController.cpp
 )
 
 ament_target_dependencies(suave_controller MAVSDK)
