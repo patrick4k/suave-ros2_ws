@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "nodes/SuavePathPlanner.h"
+#include "nodes/SuaveDualQuaternionController.h"
 
 std::shared_ptr<SuaveController> s_controller = nullptr;
 
@@ -26,13 +26,13 @@ int main(int argc, char **argv)
     
     try 
     {
-        s_controller = std::make_shared<SuavePathPlanner>();
+        s_controller = std::make_shared<SuaveDualQuaternionController>();
         s_controller->start();
         rclcpp::spin(s_controller);
     } 
     catch (const std::exception& e) 
     {
-        std::cout << "suavecpp suave_path_planner had an unexpected error!" << std::endl;
+        std::cout << "suavecpp suave_masking_controller had an unexpected error!" << std::endl;
     }
 
     rclcpp::shutdown();

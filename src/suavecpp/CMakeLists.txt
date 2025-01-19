@@ -52,6 +52,8 @@ set(SRC_CODE
   src/nodes/SuaveMaskingController.cpp
   src/nodes/SuavePathPlanner.h
   src/nodes/SuavePathPlanner.cpp
+  src/nodes/SuaveDualQuaternionController.h
+  src/nodes/SuaveDualQuaternionController.cpp
 )
 
 # suave_masking_controller
@@ -69,6 +71,14 @@ add_executable(suave_path_planner
 )
 add_deps_to_exec(suave_path_planner)
 include_compile_install(suave_path_planner)
+
+# suave_dual_quaternion_controller
+add_executable(suave_dual_quaternion_controller
+  src/suave_dual_quaternion_controller.cpp
+  ${SRC_CODE}
+)
+add_deps_to_exec(suave_dual_quaternion_controller)
+include_compile_install(suave_dual_quaternion_controller)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

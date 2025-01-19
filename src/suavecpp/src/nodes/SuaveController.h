@@ -12,7 +12,6 @@ This class serves the following purposes:
 - To construct and interact with the MAVSDK system that is our drone.
 - Localize by subscribing to the /odom topic, transforming the odom and sending it to PX4 via MAVSDK.
 - Export the point cloud data by subscribing to /cloud_map and saving the pointer to the data each update. This will be exported on shutdown.
-- 
 */
 
 class SuaveController : public rclcpp::Node
@@ -25,6 +24,7 @@ public:
 protected:
     SuaveController(std::string node_name) : rclcpp::Node(node_name)
     {
+        info("Initializing %s", this->get_name());
         // Initialize ROS topics here
     }
 

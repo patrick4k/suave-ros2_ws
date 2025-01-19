@@ -2,7 +2,7 @@
 
 #include "nodes/SuaveMaskingController.h"
 
-std::shared_ptr<SuaveMaskingController> s_controller = nullptr;
+std::shared_ptr<SuaveController> s_controller = nullptr;
 
 void signal_handler(int /*sig*/)
 {
@@ -27,6 +27,7 @@ int main(int argc, char **argv)
     try 
     {
         s_controller = std::make_shared<SuaveMaskingController>();
+        s_controller->start();
         rclcpp::spin(s_controller);
     } 
     catch (const std::exception& e) 

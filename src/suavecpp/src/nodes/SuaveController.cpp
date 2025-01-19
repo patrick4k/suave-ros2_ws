@@ -2,12 +2,12 @@
 
 void SuaveController::start()
 {
-    
+
 }
 
 void SuaveController::shutdown()
 {
-    std::cout << "SuaveController::shutdown() called" << std::endl;    
+    info("Shutting down %s", this->get_name());
     
     // TODO: Implement me!
 
