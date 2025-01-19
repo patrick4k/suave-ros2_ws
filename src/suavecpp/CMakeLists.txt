@@ -46,6 +46,7 @@ endmacro()
 
 # ADD ALL SOURCE FILES HERE
 set(SRC_CODE
+  src/start.h
   src/nodes/SuaveController.h
   src/nodes/SuaveController.cpp
   src/nodes/SuaveMaskingController.h
