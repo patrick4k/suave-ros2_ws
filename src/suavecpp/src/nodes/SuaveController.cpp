@@ -1,5 +1,10 @@
 #include "SuaveController.h"
 
+void SuaveController::start()
+{
+    
+}
+
 void SuaveController::shutdown()
 {
     std::cout << "SuaveController::shutdown() called" << std::endl;    

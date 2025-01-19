@@ -50,6 +50,8 @@ set(SRC_CODE
   src/nodes/SuaveController.cpp
   src/nodes/SuaveMaskingController.h
   src/nodes/SuaveMaskingController.cpp
+  src/nodes/SuavePathPlanner.h
+  src/nodes/SuavePathPlanner.cpp
 )
 
 # suave_masking_controller

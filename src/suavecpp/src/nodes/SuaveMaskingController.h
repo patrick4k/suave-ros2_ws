@@ -6,7 +6,7 @@
 class SuaveMaskingController : public SuaveController
 {
 public:
-    SuaveMaskingController() : SuaveController()
+    SuaveMaskingController() : SuaveController("suave_masking_controller")
     {
         // Initialize ROS topics here
     }

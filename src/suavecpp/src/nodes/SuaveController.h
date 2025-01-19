@@ -6,15 +6,45 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl-1.12/pcl/io/pcd_io.h>
 
+/*
+This class serves the following purposes:
+- Inherits rclcpp::Node such that all children of this class are also ROS2 nodes.
+- To construct and interact with the MAVSDK system that is our drone.
+- Localize by subscribing to the /odom topic, transforming the odom and sending it to PX4 via MAVSDK.
+- Export the point cloud data by subscribing to /cloud_map and saving the pointer to the data each update. This will be exported on shutdown.
+- 
+*/
+
 class SuaveController : public rclcpp::Node
 {
 public:
-    SuaveController() : rclcpp::Node("suave_controller")
+    virtual void start();
+
+    virtual void shutdown();
+
+protected:
+    SuaveController(std::string node_name) : rclcpp::Node(node_name)
     {
         // Initialize ROS topics here
     }
 
-    virtual void shutdown();
+    template<typename... T>
+    void info(T... msg)
+    {
+        RCLCPP_INFO(this->get_logger(), msg...);
+    }
+
+    template<typename... T>
+    void warn(T... msg)
+    {
+        RCLCPP_WARN(this->get_logger(), msg...);
+    }
+
+    template<typename... T>
+    void error(T... msg)
+    {
+        RCLCPP_ERROR(this->get_logger(), msg...);
+    }
 
 private:
     // Subscriptions ///////////////////////////////////////////////////

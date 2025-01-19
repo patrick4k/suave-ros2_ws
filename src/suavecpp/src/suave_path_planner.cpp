@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "nodes/SuaveController.h"
+#include "nodes/SuavePathPlanner.h"
 
-std::shared_ptr<SuaveController> s_controller = nullptr;
+std::shared_ptr<SuavePathPlanner> s_controller = nullptr;
 
 void signal_handler(int /*sig*/)
 {
@@ -26,12 +26,13 @@ int main(int argc, char **argv)
     
     try 
     {
-        s_controller = std::make_shared<SuaveController>();
+        s_controller = std::make_shared<SuavePathPlanner>();
+        s_controller->start();
         rclcpp::spin(s_controller);
     } 
     catch (const std::exception& e) 
     {
-        std::cout << "suavecpp suave_masking_controller had an unexpected error!" << std::endl;
+        std::cout << "suavecpp suave_path_planner had an unexpected error!" << std::endl;
     }
 
     rclcpp::shutdown();
