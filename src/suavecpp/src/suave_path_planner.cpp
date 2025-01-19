@@ -1,10 +1,8 @@
 #include <iostream>
 
-#include "nodes/SuaveMaskingController.h"
+#include "nodes/SuaveController.h"
 
-using Controller = SuaveMaskingController; // Specify which controller you want to use here
-
-std::shared_ptr<Controller> s_controller = nullptr;
+std::shared_ptr<SuaveController> s_controller = nullptr;
 
 void signal_handler(int /*sig*/)
 {
@@ -28,12 +26,12 @@ int main(int argc, char **argv)
     
     try 
     {
-        s_controller = std::make_shared<Controller>();
+        s_controller = std::make_shared<SuaveController>();
         rclcpp::spin(s_controller);
     } 
     catch (const std::exception& e) 
     {
-        std::cout << "suavecpp suave_controller had an unexpected error!" << std::endl;
+        std::cout << "suavecpp suave_masking_controller had an unexpected error!" << std::endl;
     }
 
     rclcpp::shutdown();

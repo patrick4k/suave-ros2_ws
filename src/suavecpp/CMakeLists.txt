@@ -27,31 +27,46 @@ find_package(MAVSDK REQUIRED)
 find_package(PCL 1.2 REQUIRED)
 find_package(pcl_conversions REQUIRED)
 
+macro(add_deps_to_exec exec)
+  ament_target_dependencies(${exec} MAVSDK)
+  ament_target_dependencies(${exec} rclcpp)
+  ament_target_dependencies(${exec} nav_msgs)
+  ament_target_dependencies(${exec} geometry_msgs)
+  ament_target_dependencies(${exec} sensor_msgs)
+  ament_target_dependencies(${exec} PCL)
+  ament_target_dependencies(${exec} pcl_conversions)
+  target_link_libraries(${exec}
+          MAVSDK::mavsdk
+  )
+  include_directories(${PCL_INCLUDE_DIRS})
+  link_directories(${PCL_LIBRARY_DIRS})
+  add_definitions(${PCL_DEFINITIONS})
+  target_link_libraries(${exec} ${PCL_LIBRARIES})
+endmacro()
+
 # ADD ALL SOURCE FILES HERE
-add_executable(suave_controller
-  src/suave_controller.cpp
+set(SRC_CODE
   src/nodes/SuaveController.h
   src/nodes/SuaveController.cpp
   src/nodes/SuaveMaskingController.h
   src/nodes/SuaveMaskingController.cpp
 )
 
-ament_target_dependencies(suave_controller MAVSDK)
-ament_target_dependencies(suave_controller rclcpp)
-ament_target_dependencies(suave_controller nav_msgs)
-ament_target_dependencies(suave_controller geometry_msgs)
-ament_target_dependencies(suave_controller sensor_msgs)
-ament_target_dependencies(suave_controller PCL)
-ament_target_dependencies(suave_controller pcl_conversions)
-target_link_libraries(suave_controller
-        MAVSDK::mavsdk
+# suave_masking_controller
+add_executable(suave_masking_controller
+  src/suave_masking_controller.cpp
+  ${SRC_CODE}
 )
-include_directories(${PCL_INCLUDE_DIRS})
-link_directories(${PCL_LIBRARY_DIRS})
-add_definitions(${PCL_DEFINITIONS})
-target_link_libraries(suave_controller ${PCL_LIBRARIES})
+add_deps_to_exec(suave_masking_controller)
+include_compile_install(suave_masking_controller)
 
-include_compile_install(suave_controller)
+# suave_path_planner
+add_executable(suave_path_planner
+  src/suave_path_planner.cpp
+  ${SRC_CODE}
+)
+add_deps_to_exec(suave_path_planner)
+include_compile_install(suave_path_planner)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
